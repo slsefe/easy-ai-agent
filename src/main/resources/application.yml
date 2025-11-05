@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: easy-ai-agent
+server:
+  servlet:
+    context-path: /ai-agent
+  port: 8080
+knife4j:
+  basic:
+    enable: true
