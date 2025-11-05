@@ -29,6 +29,11 @@ dependencies {
     implementation 'cn.hutool:hutool-all:5.8.40'
     implementation 'com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.4.0'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    // dashscope sdk 集成
+    implementation 'com.alibaba:dashscope-sdk-java:2.21.15' exclude group: 'org.slf4j', module: 'slf4j-simple'
+    // openai sdk 集成,https://mvnrepository.com/artifact/com.openai/openai-java
+    implementation("com.openai:openai-java:4.7.1")
+    implementation 'com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M6.1' exclude group: 'ch.qos.logback', module: 'logback-classic' exclude group: 'com.alibaba.cloud', module: 'spring-alibaba-nacos-config'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

@@ -1,6 +1,13 @@
 spring:
   application:
     name: easy-ai-agent
+  ai:
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY}
+      chat:
+        options:
+          model: qwen-plus
+          temperature: 0.85
 server:
   servlet:
     context-path: /ai-agent
