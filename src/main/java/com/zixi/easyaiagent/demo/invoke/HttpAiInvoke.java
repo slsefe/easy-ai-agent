@@ -7,6 +7,9 @@ import cn.hutool.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.zixi.easyaiagent.demo.invoke.Constant.DASHSCOPE_API_KEY;
+import static com.zixi.easyaiagent.demo.invoke.Constant.MODEL_QWEN_PLUS;
+
 /**
  * <a href="https://help.aliyun.com/zh/model-studio/qwen-api-reference#9141263b961cc">HTTP REST API 集成</a>
  * 对于SDK不支持的语言，或者需要灵活控制的场景，可以直接使用HTTP请求调用大模型的API
@@ -19,12 +22,12 @@ public class HttpAiInvoke {
 
         // 设置请求头
         Map<String, String> headers = new HashMap<>();
-        headers.put("Authorization", "Bearer " + System.getenv("DASHSCOPE_API_KEY"));
+        headers.put("Authorization", "Bearer " + System.getenv(DASHSCOPE_API_KEY));
         headers.put("Content-Type", "application/json");
 
         // 设置请求体
         JSONObject requestBody = new JSONObject();
-        requestBody.put("model", "qwen-plus");
+        requestBody.put("model", MODEL_QWEN_PLUS);
 
         JSONObject input = new JSONObject();
         JSONObject[] messages = new JSONObject[2];

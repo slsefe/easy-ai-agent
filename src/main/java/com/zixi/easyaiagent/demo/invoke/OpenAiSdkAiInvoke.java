@@ -6,20 +6,27 @@ import com.openai.client.okhttp.OpenAIOkHttpClient;
 import com.openai.models.chat.completions.ChatCompletion;
 import com.openai.models.chat.completions.ChatCompletionCreateParams;
 
+import static com.zixi.easyaiagent.demo.invoke.Constant.ALIYUN_DASHSCOPE_BASE_URL;
+import static com.zixi.easyaiagent.demo.invoke.Constant.DASHSCOPE_API_KEY;
+import static com.zixi.easyaiagent.demo.invoke.Constant.MODEL_QWEN_PLUS;
+
 
 /**
  * <a href="https://help.aliyun.com/zh/model-studio/qwen-api-reference#40f6d2c9d23u2">Open AI SDK接入</a>
  */
 public class OpenAiSdkAiInvoke {
+
+
+
     public static void main(String[] args) {
         OpenAIClient client = OpenAIOkHttpClient.builder()
-                .apiKey(System.getenv("DASHSCOPE_API_KEY"))
-                .baseUrl("https://dashscope.aliyuncs.com/compatible-mode/v1")
+                .apiKey(System.getenv(DASHSCOPE_API_KEY))
+                .baseUrl(ALIYUN_DASHSCOPE_BASE_URL)
                 .build();
 
         ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
                 .addUserMessage("你是谁")
-                .model("qwen-plus")
+                .model(MODEL_QWEN_PLUS)
                 .build();
 
         try {
