@@ -34,6 +34,8 @@ dependencies {
     // openai sdk 集成,https://mvnrepository.com/artifact/com.openai/openai-java
     implementation("com.openai:openai-java:4.7.1")
     implementation 'com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M6.1' exclude group: 'ch.qos.logback', module: 'logback-classic' exclude group: 'com.alibaba.cloud', module: 'spring-alibaba-nacos-config'
+    // langchain4j
+    implementation 'dev.langchain4j:langchain4j-community-dashscope:1.0.0-beta2'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
