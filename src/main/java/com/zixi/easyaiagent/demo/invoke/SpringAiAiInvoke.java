@@ -11,6 +11,7 @@ import static com.zixi.easyaiagent.demo.invoke.Constant.USER_PROMPT;
 
 
 /**
+ * SpringAIAlibaba
  * <a href="https://java2ai.com/docs/1.0.0.2/overview/">SpringAiAlibaba集成</a>
  */
 @RestController
