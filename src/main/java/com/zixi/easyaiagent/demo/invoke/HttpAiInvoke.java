@@ -9,6 +9,8 @@ import java.util.Map;
 
 import static com.zixi.easyaiagent.demo.invoke.Constant.DASHSCOPE_API_KEY;
 import static com.zixi.easyaiagent.demo.invoke.Constant.MODEL_QWEN_PLUS;
+import static com.zixi.easyaiagent.demo.invoke.Constant.SYSTEM_PROMPT;
+import static com.zixi.easyaiagent.demo.invoke.Constant.USER_PROMPT;
 
 /**
  * <a href="https://help.aliyun.com/zh/model-studio/qwen-api-reference#9141263b961cc">HTTP REST API 集成</a>
@@ -34,12 +36,12 @@ public class HttpAiInvoke {
 
         JSONObject systemMessage = new JSONObject();
         systemMessage.put("role", "system");
-        systemMessage.put("content", "You are a helpful assistant.");
+        systemMessage.put("content", SYSTEM_PROMPT);
         messages[0] = systemMessage;
 
         JSONObject userMessage = new JSONObject();
         userMessage.put("role", "user");
-        userMessage.put("content", "你是谁？");
+        userMessage.put("content", USER_PROMPT);
         messages[1] = userMessage;
 
         input.put("messages", messages);

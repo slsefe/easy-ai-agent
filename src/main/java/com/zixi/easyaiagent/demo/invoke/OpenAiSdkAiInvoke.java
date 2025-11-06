@@ -9,14 +9,13 @@ import com.openai.models.chat.completions.ChatCompletionCreateParams;
 import static com.zixi.easyaiagent.demo.invoke.Constant.ALIYUN_DASHSCOPE_BASE_URL;
 import static com.zixi.easyaiagent.demo.invoke.Constant.DASHSCOPE_API_KEY;
 import static com.zixi.easyaiagent.demo.invoke.Constant.MODEL_QWEN_PLUS;
+import static com.zixi.easyaiagent.demo.invoke.Constant.USER_PROMPT;
 
 
 /**
  * <a href="https://help.aliyun.com/zh/model-studio/qwen-api-reference#40f6d2c9d23u2">Open AI SDK接入</a>
  */
 public class OpenAiSdkAiInvoke {
-
-
 
     public static void main(String[] args) {
         OpenAIClient client = OpenAIOkHttpClient.builder()
@@ -25,7 +24,7 @@ public class OpenAiSdkAiInvoke {
                 .build();
 
         ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
-                .addUserMessage("你是谁")
+                .addUserMessage(USER_PROMPT)
                 .model(MODEL_QWEN_PLUS)
                 .build();
 

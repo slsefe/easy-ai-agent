@@ -15,6 +15,8 @@ import com.alibaba.dashscope.utils.JsonUtils;
 
 import static com.zixi.easyaiagent.demo.invoke.Constant.DASHSCOPE_API_KEY;
 import static com.zixi.easyaiagent.demo.invoke.Constant.MODEL_QWEN_PLUS;
+import static com.zixi.easyaiagent.demo.invoke.Constant.SYSTEM_PROMPT;
+import static com.zixi.easyaiagent.demo.invoke.Constant.USER_PROMPT;
 
 
 /**
@@ -26,11 +28,11 @@ public class DashScopeSdkAiInvoke {
         Generation gen = new Generation();
         Message systemMsg = Message.builder()
                 .role(Role.SYSTEM.getValue())
-                .content("You are a helpful assistant.")
+                .content(SYSTEM_PROMPT)
                 .build();
         Message userMsg = Message.builder()
                 .role(Role.USER.getValue())
-                .content("你是谁？")
+                .content(USER_PROMPT)
                 .build();
         GenerationParam param = GenerationParam.builder()
                 // 若没有配置环境变量，请用百炼API Key将下行替换为：.apiKey("sk-xxx")
