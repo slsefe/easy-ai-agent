@@ -1,5 +1,6 @@
 package com.zixi.easyaiagent.app;
 
+import com.zixi.easyaiagent.advisor.LoggerAdvisor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -25,10 +26,12 @@ public class LoveApp {
             "引导用户详述事情经过、对方反应及自身想法，以便给出专属解决方案。";
 
     public LoveApp(@Qualifier("dashscopeChatModel") ChatModel chatModel) {
+        // 初始化基于内存的对话记忆
         ChatMemory chatMemory = new InMemoryChatMemory();
+        // todo: 基于Redis的上下文内容的存储
         chatClient = ChatClient.builder(chatModel)
                 .defaultSystem(SYSTEM_PROMPT)
-                .defaultAdvisors(new MessageChatMemoryAdvisor(chatMemory))
+                .defaultAdvisors(new MessageChatMemoryAdvisor(chatMemory), new LoggerAdvisor())
                 .build();
     }
 
