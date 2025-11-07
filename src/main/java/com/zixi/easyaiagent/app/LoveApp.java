@@ -2,6 +2,7 @@ package com.zixi.easyaiagent.app;
 
 import com.zixi.easyaiagent.advisor.LoggerAdvisor;
 import com.zixi.easyaiagent.advisor.ReReadingAdvisor;
+import com.zixi.easyaiagent.chatmemory.FileBasedChatMemory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -28,13 +29,13 @@ public class LoveApp {
 
     public LoveApp(@Qualifier("dashscopeChatModel") ChatModel chatModel) {
         // 初始化基于内存的对话记忆
-        ChatMemory chatMemory = new InMemoryChatMemory();
-        // todo: 基于Redis的上下文内容的存储
+//        ChatMemory chatMemory = new InMemoryChatMemory();
+        // 初始化基于文件的对话记忆
+        String fileDir = System.getProperty("user.dir") + "/chat-memory";
+        ChatMemory chatMemory = new FileBasedChatMemory(fileDir);
         chatClient = ChatClient.builder(chatModel)
                 .defaultSystem(SYSTEM_PROMPT)
-                .defaultAdvisors(new MessageChatMemoryAdvisor(chatMemory),
-                        new LoggerAdvisor(),
-                        new ReReadingAdvisor())
+                .defaultAdvisors(new MessageChatMemoryAdvisor(chatMemory), new LoggerAdvisor())
                 .build();
     }
 
