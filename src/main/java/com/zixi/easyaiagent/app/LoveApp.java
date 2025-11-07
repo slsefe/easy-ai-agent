@@ -48,4 +48,15 @@ public class LoveApp {
                 .chatResponse();
         return chatResponse.getResult().getOutput().getText();
     }
+
+    public LoveReport doChatWithReport(String message, String chatId) {
+        LoveReport loveReport = chatClient.prompt()
+                .user(message)
+                .advisors(advisorSpec ->
+                        advisorSpec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
+                                .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
+                .call().entity(LoveReport.class);
+        log.info("Love report {}", loveReport);
+        return loveReport;
+    }
 }
