@@ -37,6 +37,7 @@ public class LoveApp {
         ChatMemory chatMemory = new FileBasedChatMemory(fileDir);
         chatClient = ChatClient.builder(chatModel)
                 .defaultSystem(SYSTEM_PROMPT)
+                // TODO: 自定义Advisor，实现权限校验、违禁词校验
                 .defaultAdvisors(new MessageChatMemoryAdvisor(chatMemory), new LoggerAdvisor())
                 .build();
     }
