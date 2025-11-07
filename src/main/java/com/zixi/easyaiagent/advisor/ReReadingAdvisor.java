@@ -40,7 +40,7 @@ public class ReReadingAdvisor implements CallAroundAdvisor, StreamAroundAdvisor 
 
     private AdvisedRequest before(AdvisedRequest advisedRequest) {
         String userText = advisedRequest.userText();
-        Map<String, Object> userParams = new HashMap<>();
+        Map<String, Object> userParams = new HashMap<>(advisedRequest.userParams());
         userParams.put("re2_input_query", userText);
         return AdvisedRequest.from(advisedRequest)
                 .userText(DEFAULT_RE2_ADVISE_TEMPLATE)
