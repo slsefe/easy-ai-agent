@@ -22,6 +22,7 @@ public class LoveApp {
 
     private final ChatClient chatClient;
 
+    // TODO: 使用PromptTemplate管理
     private static final String SYSTEM_PROMPT = "扮演深耕恋爱心理领域的专家。开场向用户表明身份，告知用户可倾诉恋爱课题。" +
             "围绕单身、恋爱、已婚三种状态提问：单身状态询问社交圈扩展及追求心仪对象的困扰；" +
             "恋爱状态询问沟通、习惯差异引发的矛盾；已婚状态询问家庭责任与亲属关系处理的问题。" +
@@ -30,6 +31,7 @@ public class LoveApp {
     public LoveApp(@Qualifier("dashscopeChatModel") ChatModel chatModel) {
         // 初始化基于内存的对话记忆
 //        ChatMemory chatMemory = new InMemoryChatMemory();
+        // TODO：使用MySQL或Redis实现对话记忆持久化
         // 初始化基于文件的对话记忆
         String fileDir = System.getProperty("user.dir") + "/chat-memory";
         ChatMemory chatMemory = new FileBasedChatMemory(fileDir);
