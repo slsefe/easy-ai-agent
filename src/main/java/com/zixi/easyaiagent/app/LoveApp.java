@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
@@ -25,6 +26,9 @@ public class LoveApp {
 
     @Resource
     private VectorStore loveAppVectorStore;
+
+    @Resource
+    private Advisor loveAppRagCloudAdvisor;
 
     // TODO: 使用PromptTemplate管理
     private static final String SYSTEM_PROMPT = "扮演深耕恋爱心理领域的专家。开场向用户表明身份，告知用户可倾诉恋爱课题。" +
@@ -68,7 +72,7 @@ public class LoveApp {
         return loveReport;
     }
 
-    public String doChatWithRag(String message, String chatId) {
+    public String doChatWithLocalRag(String message, String chatId) {
         ChatResponse chatResponse = chatClient.prompt()
                 .user(message)
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
@@ -76,6 +80,15 @@ public class LoveApp {
                 .advisors(new QuestionAnswerAdvisor(loveAppVectorStore))
                 .call().chatResponse();
         return chatResponse.getResult().getOutput().getText();
+    }
 
+    public String doChatWithCloudRag(String message, String chatId) {
+        ChatResponse chatResponse = chatClient.prompt()
+                .user(message)
+                .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
+                        .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
+                .advisors(loveAppRagCloudAdvisor)
+                .call().chatResponse();
+        return chatResponse.getResult().getOutput().getText();
     }
 }

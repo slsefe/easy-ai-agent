@@ -1,5 +1,6 @@
-package com.zixi.easyaiagent.rag;
+package com.zixi.easyaiagent.config;
 
+import com.zixi.easyaiagent.rag.LoveAppDocumentLoader;
 import jakarta.annotation.Resource;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
