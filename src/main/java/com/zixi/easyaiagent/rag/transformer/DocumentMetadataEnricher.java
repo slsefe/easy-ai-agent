@@ -32,8 +32,8 @@ public class DocumentMetadataEnricher {
      * @return 文档集合，元信息包含了关键词，key：excerpt_keywords
      */
     public List<Document> enrichDocuments(List<Document> documents, Integer keywordCount) {
-        KeywordMetadataEnricher metadataEnricher = new KeywordMetadataEnricher(chatModel, keywordCount);
-        return metadataEnricher.apply(documents);
+        KeywordMetadataEnricher enricher = new KeywordMetadataEnricher(chatModel, keywordCount);
+        return enricher.apply(documents);
     }
 
     /**
