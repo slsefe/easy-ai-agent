@@ -1,4 +1,4 @@
-package com.zixi.easyaiagent.rag;
+package com.zixi.easyaiagent.rag.writer;
 
 import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentWriter;
