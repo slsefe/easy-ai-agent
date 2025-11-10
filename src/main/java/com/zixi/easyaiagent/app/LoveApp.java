@@ -2,6 +2,7 @@ package com.zixi.easyaiagent.app;
 
 import com.zixi.easyaiagent.advisor.LoggerAdvisor;
 import com.zixi.easyaiagent.chatmemory.FileBasedChatMemory;
+import com.zixi.easyaiagent.rag.query.QueryRewriter;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
@@ -29,6 +30,9 @@ public class LoveApp {
 
     @Resource
     private Advisor loveAppRagCloudAdvisor;
+
+    @Resource
+    private QueryRewriter queryRewriter;
 
     // TODO: 使用PromptTemplate管理
     private static final String SYSTEM_PROMPT = "扮演深耕恋爱心理领域的专家。开场向用户表明身份，告知用户可倾诉恋爱课题。" +
@@ -73,8 +77,10 @@ public class LoveApp {
     }
 
     public String doChatWithLocalRag(String message, String chatId) {
+        // 查询重写
+        String rewrittenMessage = queryRewriter.doQueryRewrite(message);
         ChatResponse chatResponse = chatClient.prompt()
-                .user(message)
+                .user(rewrittenMessage)
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
                         .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
                 .advisors(new QuestionAnswerAdvisor(loveAppVectorStore))
@@ -83,8 +89,10 @@ public class LoveApp {
     }
 
     public String doChatWithCloudRag(String message, String chatId) {
+        // 查询重写
+        String rewrittenMessage = queryRewriter.doQueryRewrite(message);
         ChatResponse chatResponse = chatClient.prompt()
-                .user(message)
+                .user(rewrittenMessage)
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
                         .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
                 .advisors(loveAppRagCloudAdvisor)
