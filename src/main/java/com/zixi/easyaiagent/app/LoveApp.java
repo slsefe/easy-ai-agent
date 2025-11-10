@@ -2,7 +2,7 @@ package com.zixi.easyaiagent.app;
 
 import com.zixi.easyaiagent.advisor.LoggerAdvisor;
 import com.zixi.easyaiagent.chatmemory.FileBasedChatMemory;
-import com.zixi.easyaiagent.rag.query.QueryRewriter;
+import com.zixi.easyaiagent.rag.preretrieval.QueryRewriter;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
@@ -12,6 +12,7 @@ import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.rag.Query;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -77,8 +78,8 @@ public class LoveApp {
     }
 
     public String doChatWithLocalRag(String message, String chatId) {
-        // 查询重写
-        String rewrittenMessage = queryRewriter.doQueryRewrite(message);
+        // 预检索：查询重写
+        String rewrittenMessage = queryRewriter.doQueryRewrite(new Query(message)).text();
         ChatResponse chatResponse = chatClient.prompt()
                 .user(rewrittenMessage)
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
@@ -89,8 +90,8 @@ public class LoveApp {
     }
 
     public String doChatWithCloudRag(String message, String chatId) {
-        // 查询重写
-        String rewrittenMessage = queryRewriter.doQueryRewrite(message);
+        // 预检索：查询重写
+        String rewrittenMessage = queryRewriter.doQueryRewrite(new Query(message)).text();
         ChatResponse chatResponse = chatClient.prompt()
                 .user(rewrittenMessage)
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
