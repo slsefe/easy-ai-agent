@@ -1,4 +1,4 @@
-package com.zixi.easyaiagent.rag;
+package com.zixi.easyaiagent.rag.reader;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;

@@ -1,4 +1,4 @@
-package com.zixi.easyaiagent.rag;
+package com.zixi.easyaiagent.rag.reader;
 
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.ExtractedTextFormatter;
