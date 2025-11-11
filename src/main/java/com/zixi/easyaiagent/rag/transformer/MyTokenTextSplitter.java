@@ -11,7 +11,7 @@ import java.util.Map;
  * 使用TokenTextSplitter拆分文档
  */
 @Component
-class MyTokenTextSplitter {
+public class MyTokenTextSplitter {
 
     public static void main(String[] args) {
         Document doc1 = new Document("This is a long piece of text that needs to be split into smaller chunks for processing.",
