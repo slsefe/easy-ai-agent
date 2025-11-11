@@ -1,6 +1,10 @@
 spring:
   application:
     name: easy-ai-agent
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: pgvector
+    password: pgvector
   ai:
     dashscope:
       api-key: ${DASHSCOPE_API_KEY}
