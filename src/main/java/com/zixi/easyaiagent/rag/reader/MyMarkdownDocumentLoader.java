@@ -18,13 +18,13 @@ import java.util.Objects;
  */
 @Slf4j
 @Component
-public class LoveAppDocumentLoader {
+public class MyMarkdownDocumentLoader {
 
     private final ResourcePatternResolver resourcePatternResolver;
 
     private static final String FILE_PATH = "classpath:document/*.md";
 
-    public LoveAppDocumentLoader(ResourcePatternResolver resourcePatternResolver) {
+    public MyMarkdownDocumentLoader(ResourcePatternResolver resourcePatternResolver) {
         this.resourcePatternResolver = resourcePatternResolver;
     }
 
